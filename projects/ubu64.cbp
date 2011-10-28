@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="CYBORUS (ubu64)" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="../libcge-ubu64-debug" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="obj/Debug/" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="../libcge-ubu64-release" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="obj/Release/" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add directory="/usr/include/SDL" />
+			<Add directory="/usr/include/lua5.1" />
+		</Compiler>
+		<Linker>
+			<Add library="SDLmain" />
+			<Add library="SDL_image" />
+			<Add library="SDL_ttf" />
+			<Add library="SDL_mixer" />
+			<Add library="SDL_net" />
+			<Add library="SDL" />
+			<Add library="GL" />
+			<Add library="curl" />
+		</Linker>
+		<Unit filename="../CGE/Actor.cpp" />
+		<Unit filename="../CGE/Actor.h" />
+		<Unit filename="../CGE/Camera.cpp" />
+		<Unit filename="../CGE/Camera.h" />
+		<Unit filename="../CGE/Control.cpp" />
+		<Unit filename="../CGE/Control.h" />
+		<Unit filename="../CGE/Debug.h" />
+		<Unit filename="../CGE/Download.cpp" />
+		<Unit filename="../CGE/Download.h" />
+		<Unit filename="../CGE/Engine.cpp" />
+		<Unit filename="../CGE/Engine.h" />
+		<Unit filename="../CGE/Entity.cpp" />
+		<Unit filename="../CGE/Entity.h" />
+		<Unit filename="../CGE/Exception.cpp" />
+		<Unit filename="../CGE/Exception.h" />
+		<Unit filename="../CGE/Font.cpp" />
+		<Unit filename="../CGE/Font.h" />
+		<Unit filename="../CGE/Graphics.cpp" />
+		<Unit filename="../CGE/Graphics.h" />
+		<Unit filename="../CGE/Image.cpp" />
+		<Unit filename="../CGE/Image.h" />
+		<Unit filename="../CGE/LuaMachine.cpp" />
+		<Unit filename="../CGE/LuaMachine.h" />
+		<Unit filename="../CGE/ManagedModule.cpp" />
+		<Unit filename="../CGE/ManagedModule.h" />
+		<Unit filename="../CGE/Matrix.h" />
+		<Unit filename="../CGE/Matrix4x4.h" />
+		<Unit filename="../CGE/Model.cpp" />
+		<Unit filename="../CGE/Model.h" />
+		<Unit filename="../CGE/ModelFromFile.cpp" />
+		<Unit filename="../CGE/ModelFromFile.h" />
+		<Unit filename="../CGE/Module.cpp" />
+		<Unit filename="../CGE/Module.h" />
+		<Unit filename="../CGE/Music.cpp" />
+		<Unit filename="../CGE/Music.h" />
+		<Unit filename="../CGE/Mutex.cpp" />
+		<Unit filename="../CGE/Mutex.h" />
+		<Unit filename="../CGE/NetworkStream.cpp" />
+		<Unit filename="../CGE/NetworkStream.h" />
+		<Unit filename="../CGE/OpenGL/ClusterVBO.cpp" />
+		<Unit filename="../CGE/OpenGL/ClusterVBO.h" />
+		<Unit filename="../CGE/OpenGL/CubeMap.cpp" />
+		<Unit filename="../CGE/OpenGL/CubeMap.h" />
+		<Unit filename="../CGE/OpenGL/FragmentShader.cpp" />
+		<Unit filename="../CGE/OpenGL/FragmentShader.h" />
+		<Unit filename="../CGE/OpenGL/GLee.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../CGE/OpenGL/GLee.h" />
+		<Unit filename="../CGE/OpenGL/IndexVBO.cpp" />
+		<Unit filename="../CGE/OpenGL/IndexVBO.h" />
+		<Unit filename="../CGE/OpenGL/InterleavedVBO.cpp" />
+		<Unit filename="../CGE/OpenGL/InterleavedVBO.h" />
+		<Unit filename="../CGE/OpenGL/Program.h" />
+		<Unit filename="../CGE/OpenGL/Shader.cpp" />
+		<Unit filename="../CGE/OpenGL/Shader.h" />
+		<Unit filename="../CGE/OpenGL/Texture.cpp" />
+		<Unit filename="../CGE/OpenGL/Texture.h" />
+		<Unit filename="../CGE/OpenGL/Texture2D.cpp" />
+		<Unit filename="../CGE/OpenGL/Texture2D.h" />
+		<Unit filename="../CGE/OpenGL/VertexArrayObject.cpp" />
+		<Unit filename="../CGE/OpenGL/VertexArrayObject.h" />
+		<Unit filename="../CGE/OpenGL/VertexBufferObject.cpp" />
+		<Unit filename="../CGE/OpenGL/VertexBufferObject.h" />
+		<Unit filename="../CGE/OpenGL/VertexShader.cpp" />
+		<Unit filename="../CGE/OpenGL/VertexShader.h" />
+		<Unit filename="../CGE/Platforms.h" />
+		<Unit filename="../CGE/PropertyList.cpp" />
+		<Unit filename="../CGE/PropertyList.h" />
+		<Unit filename="../CGE/Reference.h" />
+		<Unit filename="../CGE/RenderBin.cpp" />
+		<Unit filename="../CGE/RenderBin.h" />
+		<Unit filename="../CGE/ResourceManager.h" />
+		<Unit filename="../CGE/SceneGraphNode.cpp" />
+		<Unit filename="../CGE/SceneGraphNode.h" />
+		<Unit filename="../CGE/Sound.cpp" />
+		<Unit filename="../CGE/Sound.h" />
+		<Unit filename="../CGE/StopWatch.cpp" />
+		<Unit filename="../CGE/StopWatch.h" />
+		<Unit filename="../CGE/Thread.cpp" />
+		<Unit filename="../CGE/Thread.h" />
+		<Unit filename="../CGE/Tools.cpp" />
+		<Unit filename="../CGE/Tools.h" />
+		<Unit filename="../CGE/Vectors.h" />
+		<Unit filename="../CGE/c3m.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../CGE/c3m.h" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
