@@ -34,20 +34,7 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add directory="\usr\include\SDL" />
-			<Add directory="\usr\include\lua5.1" />
 		</Compiler>
-		<Linker>
-			<Add library="mingw32" />
-			<Add library="SDLmain" />
-			<Add library="SDL_image" />
-			<Add library="SDL_ttf" />
-			<Add library="SDL_mixer" />
-			<Add library="SDL_net" />
-			<Add library="SDL" />
-			<Add library="opengl32" />
-			<Add library="curldll" />
-		</Linker>
 		<Unit filename="..\CGE\Actor.cpp" />
 		<Unit filename="..\CGE\Actor.h" />
 		<Unit filename="..\CGE\Camera.cpp" />
