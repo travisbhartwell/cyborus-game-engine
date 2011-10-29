@@ -12,6 +12,7 @@ namespace CGE
             LuaMachine();
             virtual ~LuaMachine();
 
+            void reset();
             void loadFile(const char* inFile);
             void runCommand(const char* inCommand);
             void addFunction(const char* inName, lua_CFunction inFunction);

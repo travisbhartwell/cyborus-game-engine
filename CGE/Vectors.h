@@ -101,6 +101,8 @@ namespace CGE
                 memcpy(mData, inVector, sizeof(T) * N);
             }
 
+            inline ~Vector() {}
+
             inline operator T*() { return mData; }
             inline operator const T*() const { return mData; }
 

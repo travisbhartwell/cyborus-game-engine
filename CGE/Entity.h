@@ -29,106 +29,38 @@ namespace CGE
             virtual ~Entity();
 
             virtual void update();
-            virtual void move() = 0;
-            virtual void changeDirection(float inDirection) = 0;
-            virtual void changeSpeed(float inSpeed) = 0;
+            virtual void changeDirection(double inDirection) = 0;
+            virtual void changeSpeed(double inSpeed) = 0;
 
-            void setRadius(float inRadius);
-            float getRadius();
+            inline double getMass() const           { return mMass;         }
+            inline double getRadius() const         { return mRadius;       }
+            inline const vec4d& getMomentum() const { return mMomentum;     }
+            inline const vec4d& getPosition() const { return mPosition;     }
+            inline double getMaxSpeed() const       { return mMaxSpeed;     }
+            inline double getCurrentSpeed() const   { return mCurrentSpeed; }
 
-            void addReference();
-            Entity* getReference();
-            void removeReference();
-            bool hasReferences();
+            inline void setMaxSpeed(double inSpeed) { mMaxSpeed = inSpeed;  }
+            inline void setRadius(double inRadius)  { mRadius = inRadius;   }
 
-            const vec4f& getMomentum() const;
-            const vec4f& getPosition() const;
-            inline float getMaxSpeed() { return mMaxSpeed; }
-            inline float getCurrentSpeed() { return mCurrentSpeed; }
-            inline void setMaxSpeed(float inSpeed) { mMaxSpeed = inSpeed; }
-            inline void setCurrentSpeed(float inSpeed) { mCurrentSpeed = inSpeed; }
-            void setPosition(const vec4f& inPosition);
+            inline void setCurrentSpeed(double inSpeed)
+            {
+                mCurrentSpeed = inSpeed;
+            }
 
-            bool isAlive();
-            void die();
+            inline void setPosition(const vec4d& inPosition)
+            {
+                mPosition = inPosition;
+            }
 
         protected:
-            float mRadius;
+            vec4d mMomentum;
+            vec4d mPosition;
+            vec4d mRotation;
 
-            unsigned char mNumReferences;
-
-
-            vec4f mMomentum;
-            vec4f mPosition;
-            vec4f mRotation;
-            float mMaxSpeed;
-            float mCurrentSpeed;
-
-            bool mAlive;
-
+            double mMass;
+            double mRadius;
+            double mMaxSpeed;
+            double mCurrentSpeed;
     };
-
-    inline void Entity::die()
-    {
-        mAlive = false;
-    }
-
-    inline const vec4f& Entity::getPosition() const
-    {
-        return mPosition;
-    }
-
-    inline const vec4f& Entity::getMomentum() const
-    {
-        return mMomentum;
-    }
-
-    inline float Entity::getRadius()
-    {
-        return mRadius;
-    }
-
-    inline bool Entity::isAlive()
-    {
-        return mAlive;
-    }
-
-
-    /***********************************
-    *   Here for readability with a model that
-    *   wasn't really built for reference counting.
-    *   Just indicates that you are holding a reference
-    *   to this entity somewhere
-    *************************************/
-    inline void Entity::addReference()
-    {
-        ++mNumReferences;
-    }
-
-    /**
-    *   Adds to the number of references held to this entity
-    *   and returns a reference to this entity.
-    **/
-    inline Entity* Entity::getReference()
-    {
-        ++mNumReferences;
-        return this;
-    }
-
-    /**
-    *   Removes a reference to this entity.
-    **/
-    inline void Entity::removeReference()
-    {
-        --mNumReferences;
-    }
-
-    /**
-    *   Checks to see if there are any references being held to this entity
-    **/
-    inline bool Entity::hasReferences()
-    {
-        return mNumReferences > 0;
-    }
 }
 #endif

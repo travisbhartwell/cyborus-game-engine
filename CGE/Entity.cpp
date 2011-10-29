@@ -20,11 +20,9 @@
 
 namespace CGE
 {
-    Entity::Entity()
+    Entity::Entity() : mMass(1.0), mRadius(1.0), mMaxSpeed(0.0),
+        mCurrentSpeed(0.0)
     {
-        mRadius = 1;
-        mAlive = true;
-        mNumReferences = 0;
     }
 
     Entity::~Entity()
@@ -33,16 +31,5 @@ namespace CGE
 
     void Entity::update()
     {
-        move();
-    }
-
-    void Entity::setRadius(float inRadius)
-    {
-        mRadius = inRadius;
-    }
-
-    void Entity::setPosition(const vec4f& inPosition)
-    {
-        mPosition = inPosition;
     }
 }

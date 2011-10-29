@@ -16,10 +16,10 @@ namespace CGE
             virtual ~Actor();
 
             inline void display() { mModel->display(); }
+            inline CGE::Matrix4x4<float>& matrix() { return mTransform; }
 
             void removeFromBin();
 
-            inline CGE::Matrix4x4<float>& matrix() { return mTransform; }
         private:
             Model* mModel;
 

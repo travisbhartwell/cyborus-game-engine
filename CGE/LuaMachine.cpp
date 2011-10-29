@@ -3,14 +3,21 @@
 
 namespace CGE
 {
-    LuaMachine::LuaMachine() : mLuaState(luaL_newstate())
+    LuaMachine::LuaMachine() : mLuaState(NULL)
     {
-        luaL_openlibs(mLuaState); // massive security hole
+        reset();
     }
 
     LuaMachine::~LuaMachine()
     {
         lua_close(mLuaState);
+    }
+
+    void LuaMachine::reset()
+    {
+        if (mLuaState) lua_close(mLuaState);
+        mLuaState = luaL_newstate();
+        luaL_openlibs(mLuaState);
     }
 
     void LuaMachine::addFunction(const char* inName, lua_CFunction inFunction)
