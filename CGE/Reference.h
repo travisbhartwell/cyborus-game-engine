@@ -15,14 +15,14 @@ namespace CGE
                 {
                 }
 
-                inline void Acquire() { ++mCount; }
-                inline void Release() { if (!--mCount) delete this; }
+                inline void acquire() { ++mCount; }
+                inline void release() { if (!--mCount) delete this; }
 
                 inline T* pointer() { return mPointer; }
                 inline const T* pointer () const { return mPointer; }
 
             private:
-                ~Container() { delete mPointer; }
+                inline ~Container() { delete mPointer; }
 
                 T* mPointer;
                 size_t mCount;
@@ -37,13 +37,15 @@ namespace CGE
             Reference(const Reference& inReference)
             {
                 mContainer = inReference.mContainer;
-                if (mContainer) mContainer->Acquire();
+                if (mContainer) mContainer->acquire();
             }
 
-            ~Reference()
+            inline ~Reference()
             {
-                if (mContainer) mContainer->Release();
+                if (mContainer) mContainer->release();
             }
+
+            inline bool isNull() { return !mContainer; }
 
             inline T* operator->() { return mContainer->pointer(); }
             inline const T* operator->() const { return mContainer->pointer(); }
@@ -51,12 +53,41 @@ namespace CGE
             inline T& operator*() { return *mContainer->pointer(); }
             inline const T& operator*() const { return *mContainer->pointer(); }
 
+            Reference& operator=(T* inPointer)
+            {
+                if (mContainer) mContainer->release();
+                mContainer = inPointer ? new Container(inPointer) : NULL;
+                return *this;
+            }
+
             Reference& operator=(const Reference& inReference)
             {
-                if (mContainer) mContainer->Release();
+                if (mContainer) mContainer->release();
                 mContainer = inReference.mContainer;
-                if (mContainer) mContainer->Acquire();
+                if (mContainer) mContainer->acquire();
                 return *this;
+            }
+
+            inline bool operator==(const Reference& inReference) const
+            {
+                return this == &inReference
+                    || mContainer == inReference.mContainer;
+            }
+
+            inline bool operator!=(const Reference& inReference) const
+            {
+                return this != &inReference
+                    && mContainer != inReference.mContainer;
+            }
+
+            inline bool operator==(const T* inPointer) const
+            {
+                return mContainer && mContainer->pointer() == inPointer;
+            }
+
+            inline bool operator!=(const T* inPointer) const
+            {
+                return !mContainer || mContainer->pointer() != inPointer;
             }
 
         private:
