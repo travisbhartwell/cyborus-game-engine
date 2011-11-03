@@ -1,18 +1,16 @@
 #include "SceneGraphNode.h"
+#include <cassert>
 
 namespace CGE
-{SceneGraphNode::SceneGraphNode() : mParent(NULL)
+{
+    SceneGraphNode::SceneGraphNode() : mParent(NULL)
     {
     }
 
     SceneGraphNode::~SceneGraphNode()
     {
-        for (std::list<SceneGraphNode*>::iterator i = mNodes.begin();
-            i != mNodes.end(); ++i)
-        {
-            SceneGraphNode* sgn = *i;
-            delete sgn;
-        }
+        removeFromParentNode();
+        removeAllChildren();
     }
 
     void SceneGraphNode::display()
@@ -21,14 +19,28 @@ namespace CGE
 
     void SceneGraphNode::addChildNode(SceneGraphNode* inNode)
     {
+        assert(inNode != NULL);
         inNode->mParent = this;
         mNodes.push_back(inNode);
     }
 
     void SceneGraphNode::removeChildNode(SceneGraphNode* inNode)
     {
+        assert(inNode != NULL);
         inNode->mParent = NULL;
         mNodes.remove(inNode);
+    }
+
+    void SceneGraphNode::removeAllChildren()
+    {
+        for (std::list<SceneGraphNode*>::iterator i = mNodes.begin();
+            i != mNodes.end(); ++i)
+        {
+            SceneGraphNode& sgn = *(*i);
+            sgn.mParent = NULL;
+        }
+
+        mNodes.clear();
     }
 
     void SceneGraphNode::removeFromParentNode()

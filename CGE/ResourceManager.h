@@ -24,8 +24,8 @@ namespace CGE
             ResourceManager();
             virtual ~ResourceManager();
 
-            T* load(const char* inFile);
-            void unload(const char* inFile);
+            T* load(const std::string& inFile);
+            void unload(const std::string& inFile);
 
             void unloadAll();
 
@@ -62,17 +62,16 @@ namespace CGE
     *   destroyed.
     **************************/
     template<typename T>
-    T* ResourceManager<T>::load(const char* inFile)
+    T* ResourceManager<T>::load(const std::string& inFile)
     {
         typename std::map<std::string, T*>::iterator it =
             mResources.find(inFile);
 
-        //we don't want to make the map search for the resource
-        //twice
+        // We don't want to make the map search for the resource twice.
         T* resource = NULL;
         if (it == mResources.end())
         {
-            resource = new T(inFile);
+            resource = new T(inFile.c_str());
             mResources[inFile] = resource;
         }
         else
@@ -88,7 +87,7 @@ namespace CGE
     *   has been loaded.
     *******************************/
     template<typename T>
-    void ResourceManager<T>::unload(const char* inFile)
+    void ResourceManager<T>::unload(const std::string& inFile)
     {
         typename std::map<std::string, T*>::iterator it =
             mResources.find(inFile);

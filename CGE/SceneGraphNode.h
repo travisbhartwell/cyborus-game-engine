@@ -17,6 +17,7 @@ namespace CGE
 
             void addChildNode(SceneGraphNode* inNode);
             void removeChildNode(SceneGraphNode* inNode);
+            void removeAllChildren();
             void removeFromParentNode();
 
             void updateMatrices(const CGE::Matrix4x4<float>& inMatrix);

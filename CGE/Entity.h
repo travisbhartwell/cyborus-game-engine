@@ -1,41 +1,26 @@
-/**
- *  This file is part of "Paroxysm".
- *
- *  "Paroxysm" is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  "Paroxysm" is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with "Paroxysm".  If not, see <http://www.gnu.org/licenses/>.
- */
-
 #ifndef ENTITY_H
 #define ENTITY_H
 
+#include "Actor.h"
 #include "Vectors.h"
+#include <vector>
 
 namespace CGE
 {
-    class Entity
+    class Entity : public SceneGraphNode
     {
         public:
             Entity();
             virtual ~Entity();
 
             virtual void update();
-            virtual void changeDirection(double inDirection) = 0;
-            virtual void changeSpeed(double inSpeed) = 0;
+            //virtual void changeDirection(double inDirection) = 0;
+            //virtual void changeSpeed(double inSpeed) = 0;
 
             inline double getMass() const           { return mMass;         }
             inline double getRadius() const         { return mRadius;       }
-            inline const vec4d& getMomentum() const { return mMomentum;     }
-            inline const vec4d& getPosition() const { return mPosition;     }
+            inline const vec3d& getMomentum() const { return mMomentum;     }
+            inline const vec3d& getPosition() const { return mPosition;     }
             inline double getMaxSpeed() const       { return mMaxSpeed;     }
             inline double getCurrentSpeed() const   { return mCurrentSpeed; }
 
@@ -47,20 +32,28 @@ namespace CGE
                 mCurrentSpeed = inSpeed;
             }
 
-            inline void setPosition(const vec4d& inPosition)
+            inline void setPosition(const vec3d& inPosition)
             {
                 mPosition = inPosition;
             }
 
+            inline void addActor(Actor* inActor)
+            {
+                mActors.push_back(inActor);
+                addChildNode(inActor);
+            }
+
         protected:
-            vec4d mMomentum;
-            vec4d mPosition;
-            vec4d mRotation;
+            vec3d mMomentum;
+            vec3d mPosition;
+            vec3d mRotation;
 
             double mMass;
             double mRadius;
             double mMaxSpeed;
             double mCurrentSpeed;
+
+            std::vector<Actor*> mActors;
     };
 }
 #endif
