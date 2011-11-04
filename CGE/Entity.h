@@ -26,7 +26,12 @@ namespace CGE
 
             inline void setMaxSpeed(double inSpeed) { mMaxSpeed = inSpeed;  }
             inline void setRadius(double inRadius)  { mRadius = inRadius;   }
-            inline void setDefaultRotation(vec3d inDefault) { mDefaultRotation = inDefault; }
+            inline void setMass(double inMass)      { mMass = inMass;       }
+            
+            inline void setDefaultRotation(const vec3d& inDefault)
+            {
+                mDefaultRotation = inDefault;
+            }
 
             inline void setCurrentSpeed(double inSpeed)
             {
