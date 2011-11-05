@@ -15,6 +15,7 @@ namespace CGE
 
             void update();
             void impact(const vec3d& inMomentum);
+            bool isInRangeOf(Entity* inEntity);
 
             inline double getMass() const           { return mMass;         }
             inline double getRadius() const         { return mRadius;       }

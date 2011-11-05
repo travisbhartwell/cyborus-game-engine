@@ -17,6 +17,23 @@ namespace CGE
         }
     }
 
+    bool Entity::isInRangeOf(Entity* inEntity)
+    {
+        if (!inEntity) return false;
+
+        double squareTotal = 0.0;
+        for (size_t i = 0; i < 3; ++i)
+        {
+            double d = mPosition[i] - inEntity->mPosition[i];
+            squareTotal += d * d;
+        }
+
+        double radiusTotal = mRadius + inEntity->mRadius;
+        double distance = sqrt(squareTotal);
+
+        return distance < radiusTotal;
+    }
+
     void Entity::update()
     {
         mPosition[0] += mVelocity[0];
