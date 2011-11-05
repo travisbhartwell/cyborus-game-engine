@@ -19,15 +19,31 @@ namespace CGE
 
             inline double getMass() const           { return mMass;         }
             inline double getRadius() const         { return mRadius;       }
-            inline const vec3d& getMomentum() const { return mMomentum;     }
             inline const vec3d& getPosition() const { return mPosition;     }
+            inline const vec3d& getVelocity() const { return mVelocity;     }
             inline double getMaxSpeed() const       { return mMaxSpeed;     }
             inline double getCurrentSpeed() const   { return mCurrentSpeed; }
 
             inline void setMaxSpeed(double inSpeed) { mMaxSpeed = inSpeed;  }
             inline void setRadius(double inRadius)  { mRadius = inRadius;   }
             inline void setMass(double inMass)      { mMass = inMass;       }
-            
+
+            inline void setVelocity(double inX, double inY, double inZ)
+            {
+                mVelocity[0] = inX;
+                mVelocity[1] = inY;
+                mVelocity[2] = inZ;
+            }
+
+            inline const vec3d& getMomentum()
+            {
+                mMomentum[0] = mVelocity[0] * mMass;
+                mMomentum[1] = mVelocity[1] * mMass;
+                mMomentum[2] = mVelocity[2] * mMass;
+
+                return mMomentum;
+            }
+
             inline void setDefaultRotation(const vec3d& inDefault)
             {
                 mDefaultRotation = inDefault;
@@ -50,6 +66,7 @@ namespace CGE
             }
 
         protected:
+            vec3d mVelocity;
             vec3d mMomentum;
             vec3d mPosition;
             vec3d mRotation;
