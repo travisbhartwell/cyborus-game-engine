@@ -29,6 +29,11 @@ namespace CGE
             inline void setRadius(double inRadius)  { mRadius = inRadius;   }
             inline void setMass(double inMass)      { mMass = inMass;       }
 
+            inline void setVelocity(const vec3d& inVelocity)
+            {
+                mVelocity = inVelocity;
+            }
+
             inline void setVelocity(double inX, double inY, double inZ)
             {
                 mVelocity[0] = inX;
