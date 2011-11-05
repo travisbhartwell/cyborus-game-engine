@@ -13,10 +13,8 @@ namespace CGE
             Entity();
             virtual ~Entity();
 
-            virtual void update();
-            //virtual void changeDirection(double inDirection) = 0;
-            //virtual void changeSpeed(double inSpeed) = 0;
-            void impact(const vec3d&);
+            void update();
+            void impact(const vec3d& inMomentum);
 
             inline double getMass() const           { return mMass;         }
             inline double getRadius() const         { return mRadius;       }

@@ -31,18 +31,13 @@ namespace CGE
         mTransform.rotateY(mDefaultRotation[1]);
         mTransform.rotateX(mDefaultRotation[0]);
         mTransform.rotateZ(mDefaultRotation[2]);
-
     }
 
     void Entity::impact(const vec3d& inMomentum)
     {
-
         const vec3d& vec = getMomentum();
         mVelocity[0] = (vec[0] + inMomentum[0]) / getMass();
         mVelocity[1] = (vec[1] + inMomentum[1]) / getMass();
         mVelocity[2] = (vec[2] + inMomentum[2]) / getMass();
-
     }
-
-
 }
