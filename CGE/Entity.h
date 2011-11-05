@@ -16,6 +16,7 @@ namespace CGE
             virtual void update();
             //virtual void changeDirection(double inDirection) = 0;
             //virtual void changeSpeed(double inSpeed) = 0;
+            void impact(const vec3d&);
 
             inline double getMass() const           { return mMass;         }
             inline double getRadius() const         { return mRadius;       }
