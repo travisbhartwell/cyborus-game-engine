@@ -20,7 +20,17 @@ namespace CGE
     void Entity::update()
     {
         mTransform.loadIdentity();
+
         mTransform.translate(float(mPosition[0]), float(mPosition[1]),
             float(mPosition[2]));
+
+
+        mTransform.rotateY(mDefaultRotation[1]);
+        mTransform.rotateX(mDefaultRotation[0]);
+        mTransform.rotateZ(mDefaultRotation[2]);
+
+
+
+
     }
 }
