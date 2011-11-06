@@ -40,6 +40,31 @@ namespace CGE
                 mVelocity[2] = inZ;
             }
 
+            /*******************************************
+            * Makes the entity turn at a percentage of
+            * mRotationSpeed on any of the axes
+            *
+            * Values passed in should be between -1.0 and 1.0, although
+            * greater values can be used
+            *******************************************/
+            inline void setRotation(double inX, double inY, double inZ)
+            {
+                mRotate[0] = inX;
+                mRotate[1] = inY;
+                mRotate[2] = inZ;
+            }
+
+            /**********************************************
+            * Sets the desired maximum rotation speed for each
+            * axis.
+            **********************************************/
+            inline void setRotationSpeed(double inX, double inY, double inZ)
+            {
+                mRotationSpeed[0] = inX;
+                mRotationSpeed[1] = inY;
+                mRotationSpeed[2] = inZ;
+            }
+
             inline const vec3d& getMomentum()
             {
                 mMomentum[0] = mVelocity[0] * mMass;
@@ -76,11 +101,17 @@ namespace CGE
             vec3d mPosition;
             vec3d mRotation;
             vec3d mDefaultRotation;
+            vec3d mRotationSpeed;
 
             double mMass;
             double mRadius;
             double mMaxSpeed;
             double mCurrentSpeed;
+
+
+            //value should be between -1.0 and 1.0, will cause the entity to rotate
+            //a percentage of mRotationSpeed
+            vec3d mRotate;
 
             std::vector<Actor*> mActors;
     };
