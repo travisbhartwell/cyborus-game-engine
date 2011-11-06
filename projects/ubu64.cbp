@@ -60,6 +60,8 @@
 		<Unit filename="../CGE/Image.h" />
 		<Unit filename="../CGE/LuaMachine.cpp" />
 		<Unit filename="../CGE/LuaMachine.h" />
+		<Unit filename="../CGE/LuaReference.cpp" />
+		<Unit filename="../CGE/LuaReference.h" />
 		<Unit filename="../CGE/ManagedModule.cpp" />
 		<Unit filename="../CGE/ManagedModule.h" />
 		<Unit filename="../CGE/Matrix.h" />
