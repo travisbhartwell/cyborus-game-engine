@@ -79,22 +79,4 @@ namespace CGE
         }
     }
 
-    void Entity::setCollisionCB(lua_State* inState)
-    {
-        mLuaTable.set(inState);
-        mLuaCallback.set(inState);
-    }
-
-    void Entity::onCollision(lua_State* inState, Entity* inEntity)
-    {
-        assert(inState != NULL);
-        assert(inEntity != NULL);
-
-        if (mLuaCallback.isSet())
-        {
-            mLuaCallback.get();
-            inEntity->mLuaTable.get();
-            lua_call(inState, 1, 0);
-        }
-    }
 }
