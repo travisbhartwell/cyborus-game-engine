@@ -3,6 +3,7 @@
 
 #include "Actor.h"
 #include "Vectors.h"
+#include <CGE/LuaReference.h>
 #include <lua.hpp>
 #include <vector>
 
@@ -24,12 +25,12 @@ namespace CGE
             inline const vec3d& getVelocity() const { return mVelocity;     }
             inline double getMaxSpeed() const       { return mMaxSpeed;     }
             inline double getCurrentSpeed() const   { return mCurrentSpeed; }
-            inline int getCollisionCR() const       { return mCollisionCR;}
 
             inline void setMaxSpeed(double inSpeed) { mMaxSpeed = inSpeed;  }
             inline void setRadius(double inRadius)  { mRadius = inRadius;   }
             inline void setMass(double inMass)      { mMass = inMass;       }
-            inline void setCollisionCR(int inCollisionCR)      { mCollisionCR = inCollisionCR;       }
+
+            void setCollisionCB(lua_State* inState);
 
             inline void setVelocity(const vec3d& inVelocity)
             {
@@ -41,6 +42,31 @@ namespace CGE
                 mVelocity[0] = inX;
                 mVelocity[1] = inY;
                 mVelocity[2] = inZ;
+            }
+
+            /*******************************************
+            * Makes the entity turn at a percentage of
+            * mRotationSpeed on any of the axes
+            *
+            * Values passed in should be between -1.0 and 1.0, although
+            * greater values can be used
+            *******************************************/
+            inline void setRotation(double inX, double inY, double inZ)
+            {
+                mRotate[0] = inX;
+                mRotate[1] = inY;
+                mRotate[2] = inZ;
+            }
+
+            /**********************************************
+            * Sets the desired maximum rotation speed for each
+            * axis.
+            **********************************************/
+            inline void setRotationSpeed(double inX, double inY, double inZ)
+            {
+                mRotationSpeed[0] = inX;
+                mRotationSpeed[1] = inY;
+                mRotationSpeed[2] = inZ;
             }
 
             inline const vec3d& getMomentum()
@@ -79,15 +105,22 @@ namespace CGE
             vec3d mPosition;
             vec3d mRotation;
             vec3d mDefaultRotation;
+            vec3d mRotationSpeed;
 
             double mMass;
             double mRadius;
             double mMaxSpeed;
             double mCurrentSpeed;
 
-            std::vector<Actor*> mActors;
+            LuaReference mLuaTable;
+            LuaReference mLuaCallback;
 
-             ;
+
+            //value should be between -1.0 and 1.0, will cause the entity to rotate
+            //a percentage of mRotationSpeed
+            vec3d mRotate;
+
+            std::vector<Actor*> mActors;
     };
 }
 #endif
