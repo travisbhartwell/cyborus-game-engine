@@ -3,6 +3,7 @@
 
 #include "Actor.h"
 #include "Vectors.h"
+#include <lua.hpp>
 #include <vector>
 
 namespace CGE
@@ -23,10 +24,12 @@ namespace CGE
             inline const vec3d& getVelocity() const { return mVelocity;     }
             inline double getMaxSpeed() const       { return mMaxSpeed;     }
             inline double getCurrentSpeed() const   { return mCurrentSpeed; }
+            inline int getCollisionCR() const       { return mCollisionCR;}
 
             inline void setMaxSpeed(double inSpeed) { mMaxSpeed = inSpeed;  }
             inline void setRadius(double inRadius)  { mRadius = inRadius;   }
             inline void setMass(double inMass)      { mMass = inMass;       }
+            inline void setCollisionCR(int inCollisionCR)      { mCollisionCR = inCollisionCR;       }
 
             inline void setVelocity(const vec3d& inVelocity)
             {
@@ -83,6 +86,8 @@ namespace CGE
             double mCurrentSpeed;
 
             std::vector<Actor*> mActors;
+
+             ;
     };
 }
 #endif
