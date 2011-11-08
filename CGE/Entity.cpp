@@ -1,5 +1,6 @@
 #include "Entity.h"
 #include "Control.h"
+#include <cassert>
 
 namespace CGE
 {
@@ -57,5 +58,24 @@ namespace CGE
         mVelocity[0] = (vec[0] + inMomentum[0]) / getMass();
         mVelocity[1] = (vec[1] + inMomentum[1]) / getMass();
         mVelocity[2] = (vec[2] + inMomentum[2]) / getMass();
+    }
+
+    void Entity::setCollisionCB(lua_State* inState)
+    {
+        mLuaTable.set(inState);
+        mLuaCallback.set(inState);
+    }
+
+    void Entity::onCollision(lua_State* inState, Entity* inEntity)
+    {
+        assert(inState != NULL);
+        assert(inEntity != NULL);
+
+        if (mLuaCallback.isSet())
+        {
+            mLuaCallback.get();
+            inEntity->mLuaTable.get();
+            lua_call(inState, 1, 0);
+        }
     }
 }

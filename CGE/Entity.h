@@ -3,6 +3,8 @@
 
 #include "Actor.h"
 #include "Vectors.h"
+#include "LuaReference.h"
+#include <lua.hpp>
 #include <vector>
 
 namespace CGE
@@ -27,6 +29,10 @@ namespace CGE
             inline void setMaxSpeed(double inSpeed) { mMaxSpeed = inSpeed;  }
             inline void setRadius(double inRadius)  { mRadius = inRadius;   }
             inline void setMass(double inMass)      { mMass = inMass;       }
+
+            void setCollisionCB(lua_State* inState);
+
+            void onCollision(lua_State* inState, Entity* inEntity);
 
             inline void setVelocity(const vec3d& inVelocity)
             {
@@ -115,6 +121,9 @@ namespace CGE
             double mRadius;
             double mMaxSpeed;
             double mCurrentSpeed;
+
+            LuaReference mLuaTable;
+            LuaReference mLuaCallback;
 
 
             //value should be between -1.0 and 1.0, will cause the entity to rotate

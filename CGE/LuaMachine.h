@@ -17,6 +17,8 @@ namespace CGE
             void runCommand(const char* inCommand);
             void addFunction(const char* inName, lua_CFunction inFunction);
 
+            inline lua_State* getState() { return mLuaState; }
+
         private:
             void execute();
             void reportErrors();
