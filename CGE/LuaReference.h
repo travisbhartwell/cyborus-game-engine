@@ -3,22 +3,25 @@
 
 #include <lua.hpp>
 
-class LuaReference
+namespace CGE
 {
-    public:
-        LuaReference();
-        virtual ~LuaReference();
+    class LuaReference
+    {
+        public:
+            LuaReference(lua_State* inState = NULL);
+            ~LuaReference();
 
-        inline bool isSet() { return mReference != LUA_NOREF; }
+            inline bool isSet() { return mReference != LUA_NOREF; }
 
-        void unset();
-        void set(lua_State* inState);
-        void get();
+            void unset();
+            void set(lua_State* inState);
+            void get();
 
-    protected:
-    private:
-        lua_State* mState;
-        int mReference;
-};
+        protected:
+        private:
+            lua_State* mState;
+            int mReference;
+    };
+}
 
 #endif

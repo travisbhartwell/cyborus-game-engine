@@ -3,7 +3,7 @@
 
 #include "Actor.h"
 #include "Vectors.h"
-#include <CGE/LuaReference.h>
+#include "LuaReference.h"
 #include <lua.hpp>
 #include <vector>
 
@@ -31,6 +31,8 @@ namespace CGE
             inline void setMass(double inMass)      { mMass = inMass;       }
 
             void setCollisionCB(lua_State* inState);
+
+            void onCollision(lua_State* inState, Entity* inEntity);
 
             inline void setVelocity(const vec3d& inVelocity)
             {
