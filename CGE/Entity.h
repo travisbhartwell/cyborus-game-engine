@@ -34,6 +34,10 @@ namespace CGE
 
             void onCollision(lua_State* inState, Entity* inEntity);
 
+            void setCollisionCB(lua_State* inState);
+
+            void onCollision(lua_State* inState, Entity* inEntity);
+
             inline void setVelocity(const vec3d& inVelocity)
             {
                 mVelocity = inVelocity;
@@ -121,6 +125,9 @@ namespace CGE
             double mRadius;
             double mMaxSpeed;
             double mCurrentSpeed;
+
+            LuaReference mLuaTable;
+            LuaReference mLuaCallback;
 
             LuaReference mLuaTable;
             LuaReference mLuaCallback;
