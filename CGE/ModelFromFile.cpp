@@ -34,8 +34,7 @@ namespace CGE
 
     void ModelFromFile::loadC3M(const char* inFile)
     {
-        string file = "assets/models/";
-        file += inFile;
+        string file = inFile;
         c3mModel* c3m = c3mOpen(file.c_str());
 
         if (c3mError)

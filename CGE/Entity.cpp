@@ -40,6 +40,7 @@ namespace CGE
         mPosition[1] += mVelocity[1];
         mPosition[2] += mVelocity[2];
 
+
         mTransform.loadIdentity();
 
         mTransform.translate(float(mPosition[0]), float(mPosition[1]),

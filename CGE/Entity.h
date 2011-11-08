@@ -89,10 +89,18 @@ namespace CGE
                 mPosition = inPosition;
             }
 
-            inline void addActor(Actor* inActor)
+            inline void addActor(Actor* inActor, size_t inIndex = 0)
             {
                 mActors.push_back(inActor);
-                addChildNode(inActor);
+
+                if (inIndex == 0)
+                {
+                    addChildNode(inActor);
+                }
+                else
+                {
+                    mActors[inIndex - 1]->addChildNode(inActor);
+                }
             }
 
         protected:
