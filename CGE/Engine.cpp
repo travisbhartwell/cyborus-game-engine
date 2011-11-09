@@ -3,11 +3,10 @@
 #include "Platforms.h"
 #include "Image.h"
 #include "Exception.h"
-#include "Sound.h"
+#include "OpenAL/Sound.h"
 
 #include <SDL_ttf.h>
 #include <SDL_net.h>
-#include <SDL_mixer.h>
 
 #include <ctime>
 #include <fstream>
@@ -83,7 +82,12 @@ namespace CGE
             fout.close();
         }
 
-        if (mSettings.sound) Mix_CloseAudio();
+        if (mSettings.sound)
+        {
+            Sound::Cleanup();
+            alureShutdownDevice();
+        }
+
         SDLNet_Quit();
         TTF_Quit();
         SDL_Quit();
@@ -224,8 +228,6 @@ namespace CGE
             exit(1);
         }
 
-
-
         if (TTF_Init() == -1)
         {
             cerr << "-- error on TTF_Init -- " << TTF_GetError() << endl;
@@ -241,25 +243,21 @@ namespace CGE
             exit(1);
         }
 
-        if (mSettings.sound)
-        {
-            if (Mix_OpenAudio(mConfig.get("audio rate", 22050),
-                mConfig.get("audio format", AUDIO_S16SYS),
-                mConfig.get("audio channels", 2),
-                mConfig.get("audio buffer size", 1024)) == -1)
-            {
-                cerr << "-- error on Mix_OpenAudio -- " << Mix_GetError() << endl;
-                fout.close();
-                exit(1);
-            }
-
-            Mix_AllocateChannels(NUM_CHANNELS);
-        }
-
 #ifdef __WIN32__
         freopen("CON", "w", stdout);
         freopen("CON", "w", stderr);
 #endif
+
+        if (mSettings.sound)
+        {
+            if (!alureInitDevice(NULL, NULL))
+            {
+                cerr << "-- error on alureInitDevice --\n";
+                exit(1);
+            }
+
+            Sound::Setup(16);
+        }
 
 
         // get available full screen modes

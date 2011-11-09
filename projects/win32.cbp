@@ -70,12 +70,12 @@
 		<Unit filename="..\CGE\ModelFromFile.h" />
 		<Unit filename="..\CGE\Module.cpp" />
 		<Unit filename="..\CGE\Module.h" />
-		<Unit filename="..\CGE\Music.cpp" />
-		<Unit filename="..\CGE\Music.h" />
 		<Unit filename="..\CGE\Mutex.cpp" />
 		<Unit filename="..\CGE\Mutex.h" />
 		<Unit filename="..\CGE\NetworkStream.cpp" />
 		<Unit filename="..\CGE\NetworkStream.h" />
+		<Unit filename="..\CGE\OpenAL\Sound.cpp" />
+		<Unit filename="..\CGE\OpenAL\Sound.h" />
 		<Unit filename="..\CGE\OpenGL\ClusterVBO.cpp" />
 		<Unit filename="..\CGE\OpenGL\ClusterVBO.h" />
 		<Unit filename="..\CGE\OpenGL\CubeMap.cpp" />
@@ -112,8 +112,6 @@
 		<Unit filename="..\CGE\ResourceManager.h" />
 		<Unit filename="..\CGE\SceneGraphNode.cpp" />
 		<Unit filename="..\CGE\SceneGraphNode.h" />
-		<Unit filename="..\CGE\Sound.cpp" />
-		<Unit filename="..\CGE\Sound.h" />
 		<Unit filename="..\CGE\StopWatch.cpp" />
 		<Unit filename="..\CGE\StopWatch.h" />
 		<Unit filename="..\CGE\Thread.cpp" />
