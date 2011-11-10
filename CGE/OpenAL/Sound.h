@@ -12,8 +12,6 @@ namespace CGE
             Sound(const char* inFile);
             ~Sound();
 
-            inline bool isFinished() const { return mFinished; }
-
             void play();
 
             static void Setup(size_t inNumSources);
@@ -22,12 +20,19 @@ namespace CGE
         protected:
         private:
             ALuint mHandle;
-            volatile bool mFinished;
+
+            struct ActiveSound
+            {
+                volatile bool isPlaying;
+                bool isAttached;
+                ALuint buffer;
+            };
 
             static void finished(void* inData, ALuint inHandle);
             static size_t mNumSources;
             static size_t mCurrentSource;
             static ALuint* mSources;
+            static ActiveSound* mActiveSounds;
     };
 }
 

@@ -256,7 +256,7 @@ namespace CGE
                 exit(1);
             }
 
-            Sound::Setup(16);
+            Sound::Setup(mConfig.get("audio sources", 16));
         }
 
 
