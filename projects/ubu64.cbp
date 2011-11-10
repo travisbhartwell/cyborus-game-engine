@@ -78,6 +78,8 @@
 		<Unit filename="../CGE/Mutex.h" />
 		<Unit filename="../CGE/NetworkStream.cpp" />
 		<Unit filename="../CGE/NetworkStream.h" />
+		<Unit filename="../CGE/OpenAL/Sound.cpp" />
+		<Unit filename="../CGE/OpenAL/Sound.h" />
 		<Unit filename="../CGE/OpenGL/ClusterVBO.cpp" />
 		<Unit filename="../CGE/OpenGL/ClusterVBO.h" />
 		<Unit filename="../CGE/OpenGL/CubeMap.cpp" />

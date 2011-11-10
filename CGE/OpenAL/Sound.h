@@ -1,7 +1,8 @@
 #ifndef SOUND_H
 #define SOUND_H
 
-#include <alure.h>
+#include "alure.h"
+#include <cstdlib>
 
 namespace CGE
 {
