@@ -12,7 +12,7 @@ namespace CGE
     class Entity : public SceneGraphNode
     {
         public:
-            Entity();
+            Entity(lua_State* inState);
             virtual ~Entity();
 
             void update();

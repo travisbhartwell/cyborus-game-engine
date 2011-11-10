@@ -4,9 +4,11 @@
 
 namespace CGE
 {
-    Entity::Entity() : mMass(1.0), mRadius(1.0), mMaxSpeed(0.0),
+    Entity::Entity(lua_State* inState) : mMass(1.0), mRadius(1.0), mMaxSpeed(0.0),
         mCurrentSpeed(0.0)
     {
+        assert(inState != NULL);
+        mLuaTable.set(inState);
     }
 
     Entity::~Entity()
@@ -62,7 +64,7 @@ namespace CGE
 
     void Entity::setCollisionCB(lua_State* inState)
     {
-        mLuaTable.set(inState);
+        assert(inState != NULL);
         mLuaCallback.set(inState);
     }
 
