@@ -12,8 +12,9 @@ namespace CGE
             CubeMap();
             virtual ~CubeMap();
 
-            void loadImages(const Image* inImages[]);
-            void loadFiles(const char* inFiles[]);
+            void loadImages(const Image& inPositiveX, const Image& inNegativeX,
+                const Image& inPositiveY, const Image& inNegativeY,
+                const Image& inPositiveZ, const Image& inNegativeZ);
 
         private:
             CubeMap(const CubeMap& inCubeMap) : Texture(0)

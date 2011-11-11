@@ -3,11 +3,9 @@
 #include "Platforms.h"
 #include "Image.h"
 #include "Exception.h"
-#include "Sound.h"
 
 #include <SDL_ttf.h>
 #include <SDL_net.h>
-#include <SDL_mixer.h>
 
 #include <ctime>
 #include <fstream>
@@ -83,7 +81,7 @@ namespace CGE
             fout.close();
         }
 
-        if (mSettings.sound) Mix_CloseAudio();
+        //if (mSettings.sound) Mix_CloseAudio();
         SDLNet_Quit();
         TTF_Quit();
         SDL_Quit();
@@ -243,17 +241,7 @@ namespace CGE
 
         if (mSettings.sound)
         {
-            if (Mix_OpenAudio(mConfig.get("audio rate", 22050),
-                mConfig.get("audio format", AUDIO_S16SYS),
-                mConfig.get("audio channels", 2),
-                mConfig.get("audio buffer size", 1024)) == -1)
-            {
-                cerr << "-- error on Mix_OpenAudio -- " << Mix_GetError() << endl;
-                fout.close();
-                exit(1);
-            }
-
-            Mix_AllocateChannels(NUM_CHANNELS);
+            // goodbye SDL_mixer
         }
 
 #ifdef __WIN32__

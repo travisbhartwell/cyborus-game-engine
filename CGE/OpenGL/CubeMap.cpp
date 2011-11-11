@@ -13,16 +13,10 @@ namespace CGE
     {
     }
 
-    void CubeMap::loadImages(const Image* inImages[])
+    void CubeMap::loadImages(const Image& inPositiveX, const Image& inNegativeX,
+        const Image& inPositiveY, const Image& inNegativeY,
+        const Image& inPositiveZ, const Image& inNegativeZ)
     {
-        const GLenum faces[6] = {
-            GL_TEXTURE_CUBE_MAP_POSITIVE_X,
-            GL_TEXTURE_CUBE_MAP_NEGATIVE_X,
-            GL_TEXTURE_CUBE_MAP_POSITIVE_Y,
-            GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
-            GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
-            GL_TEXTURE_CUBE_MAP_NEGATIVE_Z };
-
         const GLenum params1[] = {
             GL_TEXTURE_MAG_FILTER, GL_LINEAR,
             GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE,
@@ -37,23 +31,14 @@ namespace CGE
         bind();
         processParams(params1);
 
-        for (size_t i = 0; i < 6; ++i)
-            inImages[i]->loadIntoTexture(faces[i]);
+        inPositiveX.loadIntoTexture(GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+        inNegativeX.loadIntoTexture(GL_TEXTURE_CUBE_MAP_NEGATIVE_X);
+        inPositiveY.loadIntoTexture(GL_TEXTURE_CUBE_MAP_POSITIVE_Y);
+        inNegativeY.loadIntoTexture(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y);
+        inPositiveZ.loadIntoTexture(GL_TEXTURE_CUBE_MAP_POSITIVE_Z);
+        inNegativeZ.loadIntoTexture(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z);
 
         glGenerateMipmap(mTarget);
         processParams(params2);
-    }
-
-    void CubeMap::loadFiles(const char* inFiles[])
-    {
-        Image images[6];
-        const Image* imagePointers[6];
-        for (size_t i = 0; i < 6; ++i)
-        {
-            images[i].loadFile(inFiles[i]);
-            imagePointers[i] = images + i;
-        }
-
-        loadImages(imagePointers);
     }
 }
