@@ -71,6 +71,8 @@ namespace CGE
 
     void Sound::play()
     {
+        if (!mHandle) return;
+
         ActiveSound* openSlot = NULL;
         for (size_t i = 0; i < mNumSources; ++i)
         {
