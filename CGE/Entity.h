@@ -116,17 +116,17 @@ namespace CGE
                 mPosition = inPosition;
             }
 
-            inline int addActor(Actor* inActor, size_t inIndex = 0)
+            inline int addActor(Actor* inActor, size_t inIndex = -1)
             {
                 mActors.push_back(inActor);
 
-                if (inIndex == 0)
+                if (mActors.size() < 1 || inIndex == -1)
                 {
                     addChildNode(inActor);
                 }
                 else
                 {
-                    mActors[inIndex - 1]->addChildNode(inActor);
+                    mActors[inIndex]->addChildNode(inActor);
                 }
                 return mActors.size() - 1;
             }
