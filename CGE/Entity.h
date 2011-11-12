@@ -30,6 +30,8 @@ namespace CGE
             inline void setRadius(double inRadius)  { mRadius = inRadius;   }
             inline void setMass(double inMass)      { mMass = inMass;       }
 
+            inline Actor* getActor(int inActor) { return mActors[inActor]; }
+
             void setCollisionCB(lua_State* inState);
 
             void onCollision(lua_State* inState, Entity* inEntity);
@@ -46,29 +48,48 @@ namespace CGE
                 mVelocity[2] = inZ;
             }
 
+            inline void rotateActor(int inActor, double inXRotation, double inYRotation, double inZRotation)
+            {
+                Actor* next = mActors[inActor];
+                next->matrix().rotateX(inXRotation);
+                next->matrix().rotateY(inYRotation);
+                next->matrix().rotateZ(inZRotation);
+            }
+
+            inline void resetActorMatrix(int inActor)
+            {
+                mActors[inActor]->matrix().loadIdentity();
+                //std::cerr << "actor: " << inActor << std::endl;
+            }
+
+            inline int numActors()
+            {
+                return mActors.size();
+            }
+
             /*******************************************
             * Makes the entity turn at a percentage of
-            * mRotationSpeed on any of the axes
+            * mMaxTurnSpeed on any of the axes
             *
             * Values passed in should be between -1.0 and 1.0, although
             * greater values can be used
             *******************************************/
-            inline void setRotation(double inX, double inY, double inZ)
+            inline void setTurnRate(double inX, double inY, double inZ)
             {
-                mRotate[0] = inX;
-                mRotate[1] = inY;
-                mRotate[2] = inZ;
+                mTurn[0] = inX;
+                mTurn[1] = inY;
+                mTurn[2] = inZ;
             }
 
             /**********************************************
             * Sets the desired maximum rotation speed for each
             * axis.
             **********************************************/
-            inline void setRotationSpeed(double inX, double inY, double inZ)
+            inline void setMaxTurnSpeed(double inX, double inY, double inZ)
             {
-                mRotationSpeed[0] = inX;
-                mRotationSpeed[1] = inY;
-                mRotationSpeed[2] = inZ;
+                mMaxTurnSpeed[0] = inX;
+                mMaxTurnSpeed[1] = inY;
+                mMaxTurnSpeed[2] = inZ;
             }
 
             inline const vec3d& getMomentum()
@@ -95,7 +116,7 @@ namespace CGE
                 mPosition = inPosition;
             }
 
-            inline void addActor(Actor* inActor, size_t inIndex = 0)
+            inline int addActor(Actor* inActor, size_t inIndex = 0)
             {
                 mActors.push_back(inActor);
 
@@ -107,6 +128,7 @@ namespace CGE
                 {
                     mActors[inIndex - 1]->addChildNode(inActor);
                 }
+                return mActors.size() - 1;
             }
 
         protected:
@@ -115,7 +137,7 @@ namespace CGE
             vec3d mPosition;
             vec3d mRotation;
             vec3d mDefaultRotation;
-            vec3d mRotationSpeed;
+            vec3d mMaxTurnSpeed;
 
             double mMass;
             double mRadius;
@@ -127,8 +149,8 @@ namespace CGE
 
 
             //value should be between -1.0 and 1.0, will cause the entity to rotate
-            //a percentage of mRotationSpeed
-            vec3d mRotate;
+            //a percentage of mMaxTurnSpeed
+            vec3d mTurn;
 
             std::vector<Actor*> mActors;
     };
