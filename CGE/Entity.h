@@ -51,13 +51,8 @@ namespace CGE
                 mVelocity[2] = inZ;
             }
 
-            inline void rotateActor(int inActor, double inXRotation, double inYRotation, double inZRotation)
-            {
-                Actor* next = mActors[inActor];
-                next->matrix().rotateX(inXRotation);
-                next->matrix().rotateY(inYRotation);
-                next->matrix().rotateZ(inZRotation);
-            }
+            void rotateActor(size_t inIndex, double inXRotation,
+                double inYRotation, double inZRotation);
 
             inline void resetActorMatrix(int inActor)
             {

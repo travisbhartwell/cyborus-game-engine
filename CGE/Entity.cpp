@@ -101,4 +101,16 @@ namespace CGE
 
         return mActors.size() - 1;
     }
+
+    void Entity::rotateActor(size_t inIndex, double inXRotation,
+        double inYRotation, double inZRotation)
+    {
+        Actor* a = getActor(inIndex);
+        if (a)
+        {
+            a->matrix().rotateX(inXRotation);
+            a->matrix().rotateY(inYRotation);
+            a->matrix().rotateZ(inZRotation);
+        }
+    }
 }
