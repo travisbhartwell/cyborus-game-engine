@@ -30,7 +30,10 @@ namespace CGE
             inline void setRadius(double inRadius)  { mRadius = inRadius;   }
             inline void setMass(double inMass)      { mMass = inMass;       }
 
-            inline Actor* getActor(int inActor) { return mActors[inActor]; }
+            inline Actor* getActor(size_t inIndex)
+            {
+                return inIndex < mActors.size() ? mActors[inIndex] : NULL;
+            }
 
             void setCollisionCB(lua_State* inState);
 
@@ -62,7 +65,7 @@ namespace CGE
                 //std::cerr << "actor: " << inActor << std::endl;
             }
 
-            inline int numActors()
+            inline size_t numActors()
             {
                 return mActors.size();
             }
@@ -116,20 +119,8 @@ namespace CGE
                 mPosition = inPosition;
             }
 
-            inline int addActor(Actor* inActor, size_t inIndex = -1)
-            {
-                mActors.push_back(inActor);
-
-                if (mActors.size() < 1 || inIndex == -1)
-                {
-                    addChildNode(inActor);
-                }
-                else
-                {
-                    mActors[inIndex]->addChildNode(inActor);
-                }
-                return mActors.size() - 1;
-            }
+            size_t addActor(Actor* inActor);
+            size_t addActor(Actor* inActor, size_t inIndex);
 
         protected:
             vec3d mVelocity;
@@ -147,9 +138,8 @@ namespace CGE
             LuaReference mLuaTable;
             LuaReference mLuaCallback;
 
-
-            //value should be between -1.0 and 1.0, will cause the entity to rotate
-            //a percentage of mMaxTurnSpeed
+            // Value should be between -1.0 and 1.0, will cause the entity to
+            // rotate a percentage of mMaxTurnSpeed.
             vec3d mTurn;
 
             std::vector<Actor*> mActors;
