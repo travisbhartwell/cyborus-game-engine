@@ -80,4 +80,37 @@ namespace CGE
             lua_call(inState, 1, 0);
         }
     }
+
+    size_t Entity::addActor(Actor* inActor)
+    {
+        assert(inActor != NULL);
+        mActors.push_back(inActor);
+        addChildNode(inActor);
+        return mActors.size() - 1;
+    }
+
+    size_t Entity::addActor(Actor* inActor, size_t inIndex)
+    {
+        assert(inActor != NULL);
+        mActors.push_back(inActor);
+
+        if (inIndex < mActors.size())
+            mActors[inIndex]->addChildNode(inActor);
+        else
+            addChildNode(inActor);
+
+        return mActors.size() - 1;
+    }
+
+    void Entity::rotateActor(size_t inIndex, double inXRotation,
+        double inYRotation, double inZRotation)
+    {
+        Actor* a = getActor(inIndex);
+        if (a)
+        {
+            a->matrix().rotateX(inXRotation);
+            a->matrix().rotateY(inYRotation);
+            a->matrix().rotateZ(inZRotation);
+        }
+    }
 }
