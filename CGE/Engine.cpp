@@ -67,7 +67,8 @@ namespace CGE
     }
 
     Engine::Engine(const Settings& inSettings) : mWindowIcon(NULL),
-        mSettings(inSettings), mFullExitRequested(false)
+        mSettings(inSettings), mFullExitRequested(false), mAlDevice(NULL),
+        mAlContext(NULL), mSourcePool(NULL)
     {
         initialize();
     }
@@ -81,7 +82,21 @@ namespace CGE
             fout.close();
         }
 
-        //if (mSettings.sound) Mix_CloseAudio();
+        if (mSettings.sound)
+        {
+            if (mAlContext)
+            {
+                delete mSourcePool;
+                alcMakeContextCurrent(NULL);
+                alcDestroyContext(mAlContext);
+            }
+
+            if (mAlDevice)
+            {
+                alcCloseDevice(mAlDevice);
+            }
+        }
+
         SDLNet_Quit();
         TTF_Quit();
         SDL_Quit();
@@ -222,8 +237,6 @@ namespace CGE
             exit(1);
         }
 
-
-
         if (TTF_Init() == -1)
         {
             cerr << "-- error on TTF_Init -- " << TTF_GetError() << endl;
@@ -239,15 +252,35 @@ namespace CGE
             exit(1);
         }
 
-        if (mSettings.sound)
-        {
-            // goodbye SDL_mixer
-        }
-
 #ifdef __WIN32__
         freopen("CON", "w", stdout);
         freopen("CON", "w", stderr);
 #endif
+
+        if (mSettings.sound)
+        {
+            mAlDevice = alcOpenDevice(NULL);
+            if (mAlDevice)
+            {
+                mAlContext = alcCreateContext(mAlDevice, NULL);
+
+                if (mAlContext)
+                {
+                    alcMakeContextCurrent(mAlContext);
+                    mSourcePool = new SourcePool(
+                        mConfig.get("audio sources", 32));
+                    cerr << "-- OpenAL is working! --\n";
+                }
+                else
+                {
+                    cerr << "-- error on alcCreateContext --\n";
+                }
+            }
+            else
+            {
+                cerr << "-- error on alcOpenDevice --\n";
+            }
+        }
 
 
         // get available full screen modes
