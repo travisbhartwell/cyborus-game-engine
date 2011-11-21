@@ -16,6 +16,11 @@ namespace CGE
 
         protected:
         private:
+            void loadOgg(const char* inFile);
+            void loadWav(const char* inFile);
+
+            ALuint mHandle;
+
             SoundBuffer(const SoundBuffer& inSoundBuffer)
             {
                 // no copying
@@ -26,8 +31,6 @@ namespace CGE
                 // no copying
                 return *this;
             }
-
-            ALuint mHandle;
     };
 }
 

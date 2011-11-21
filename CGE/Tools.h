@@ -12,6 +12,11 @@ namespace CGE
         return (inMin * (1.0 - inT)) + (inMax * inT);
     }
 
+    template<typename T>
+    inline void readBytes(void* inData, T& outResult)
+    {
+        outResult = *reinterpret_cast<T*>(inData);
+    }
 }
 
 #endif
