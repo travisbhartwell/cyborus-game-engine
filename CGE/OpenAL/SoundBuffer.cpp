@@ -171,6 +171,8 @@ namespace CGE
 
                     if (dataChunkSize > 0)
                     {
+                        std::cerr << "data chunk size == " << dataChunkSize
+                            << '\n';
                         alBufferData(mHandle, format == 1 ? AL_FORMAT_MONO16
                             : AL_FORMAT_STEREO16, buffer + 44 + offset,
                             dataChunkSize, sampleRate);

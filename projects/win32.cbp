@@ -34,6 +34,7 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-DCURL_STATICLIB" />
 		</Compiler>
 		<Unit filename="..\CGE\Actor.cpp" />
 		<Unit filename="..\CGE\Actor.h" />
