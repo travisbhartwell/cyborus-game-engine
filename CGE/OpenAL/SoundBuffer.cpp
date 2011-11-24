@@ -36,8 +36,10 @@ namespace CGE
         if (!inFile || !*inFile) return;
 
         const char* lastDot = NULL;
+        size_t length = 0;
         for (const char* i = inFile; *i; ++i)
         {
+            ++length;
             if (*i == '.') lastDot = i;
         }
 
@@ -45,9 +47,9 @@ namespace CGE
         {
             const char* extension = lastDot + 1;
 
-            if (!stricmp(extension, "ogg"))
+            if (caseInsensitiveEquals(extension, "ogg"))
                 loadOgg(inFile);
-            else if (!stricmp(extension, "wav"))
+            else if (caseInsensitiveEquals(extension, "wav"))
                 loadWav(inFile);
         }
         else

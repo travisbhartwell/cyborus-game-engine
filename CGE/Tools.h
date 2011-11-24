@@ -4,6 +4,8 @@
 #define TO_RADIANS(n)((n) * PI / 180.0)
 namespace CGE
 {
+    bool caseInsensitiveEquals(const char* inA, const char* inB);
+
     char* fileToBuffer(const char* inFile);
 
     template<class T>
