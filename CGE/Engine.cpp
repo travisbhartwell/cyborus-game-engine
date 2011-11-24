@@ -3,6 +3,7 @@
 #include "Platforms.h"
 #include "Image.h"
 #include "Exception.h"
+#include "OpenAL/Audio.h"
 
 #include <SDL_ttf.h>
 #include <SDL_net.h>
@@ -67,8 +68,7 @@ namespace CGE
     }
 
     Engine::Engine(const Settings& inSettings) : mWindowIcon(NULL),
-        mSettings(inSettings), mFullExitRequested(false), mAlDevice(NULL),
-        mAlContext(NULL), mSourcePool(NULL)
+        mSettings(inSettings), mFullExitRequested(false)
     {
         initialize();
     }
@@ -84,17 +84,7 @@ namespace CGE
 
         if (mSettings.sound)
         {
-            if (mAlContext)
-            {
-                delete mSourcePool;
-                alcMakeContextCurrent(NULL);
-                alcDestroyContext(mAlContext);
-            }
-
-            if (mAlDevice)
-            {
-                alcCloseDevice(mAlDevice);
-            }
+            cleanupAudio();
         }
 
         SDLNet_Quit();
@@ -259,27 +249,7 @@ namespace CGE
 
         if (mSettings.sound)
         {
-            mAlDevice = alcOpenDevice(NULL);
-            if (mAlDevice)
-            {
-                mAlContext = alcCreateContext(mAlDevice, NULL);
-
-                if (mAlContext)
-                {
-                    alcMakeContextCurrent(mAlContext);
-                    mSourcePool = new SourcePool(
-                        mConfig.get("audio sources", 32));
-                    cerr << "-- OpenAL is working! --\n";
-                }
-                else
-                {
-                    cerr << "-- error on alcCreateContext --\n";
-                }
-            }
-            else
-            {
-                cerr << "-- error on alcOpenDevice --\n";
-            }
+            setupAudio(mConfig.get("audio sources", 32));
         }
 
 

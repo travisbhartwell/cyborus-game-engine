@@ -58,6 +58,11 @@ namespace CGE
         }
     }
 
+    void SoundBuffer::bindToSource(ALuint inSource) const
+    {
+        alSourcei(inSource, AL_BUFFER, mHandle);
+    }
+
     void SoundBuffer::loadOgg(const char* inFile)
     {
         FILE* f = fopen(inFile, "rb");

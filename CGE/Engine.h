@@ -3,7 +3,6 @@
 
 #include "Graphics.h"
 #include "ManagedModule.h"
-#include "OpenAL/SourcePool.h"
 
 #include <iostream>
 
@@ -34,11 +33,6 @@ namespace CGE
             void run(Module& inModule);
             void manage(ManagedModule* inModule);
 
-            inline bool isSoundWorking()
-            {
-                return mSettings.sound && mAlDevice && mAlContext;
-            }
-
         private:
             void initialize();
 
@@ -48,9 +42,6 @@ namespace CGE
             SDL_Rect** mModes;
             Settings mSettings;
             bool mFullExitRequested;
-            ALCdevice* mAlDevice;
-            ALCcontext* mAlContext;
-            SourcePool* mSourcePool;
 
             static void logOpenGL(std::ostream& inStream);
             static void prepareFiles();
