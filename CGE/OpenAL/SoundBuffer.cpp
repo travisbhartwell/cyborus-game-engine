@@ -14,15 +14,10 @@ namespace CGE
 {
     SoundBuffer::SoundBuffer(const char* inFile) : mHandle(0)
     {
-        if (alcGetCurrentContext())
+        if (isAudioActive())
         {
-            std::cerr << "found context -- generating buffer\n";
             alGenBuffers(1, &mHandle);
             loadFile(inFile);
-        }
-        else
-        {
-            std::cerr << "no context\n";
         }
     }
 
@@ -180,9 +175,14 @@ namespace CGE
                     {
                         std::cerr << "data chunk size == " << dataChunkSize
                             << '\n';
+
+                        // I have to double the sample rate to make the sound
+                        // play at regular speed. I don't know why. Online
+                        // documentation makes no mention of needing such an
+                        // adjustment.
                         alBufferData(mHandle, format == 1 ? AL_FORMAT_MONO16
                             : AL_FORMAT_STEREO16, buffer + 44 + offset,
-                            dataChunkSize, sampleRate);
+                            dataChunkSize, sampleRate * 2);
                     }
                     else
                     {
