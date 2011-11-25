@@ -39,7 +39,7 @@ namespace CGE
 
         if (c3mError)
         {
-            cerr << "error!" << endl;
+            cerr << "error! -- " << c3mError << endl;
             return;
         }
 
@@ -63,14 +63,13 @@ namespace CGE
             useColors = true;
         }
 
-
         size = c3m->textureCoordinates.size / 2;
         if (size > 0)
         {
             ++clusterSize;
             useTexture = true;
 
-            string texFile = "assets/images/models/";
+            string texFile = "data/images/";
             texFile += c3m->textureFile;
             cerr << texFile << endl;
 
@@ -112,11 +111,7 @@ namespace CGE
 
         size = c3m->indices.size / 3;
         GLuint* indices = c3m->indices.array;
-        //mVBO.loadIndexArray(GL_TRIANGLES, size, indices);
-    //    CGE::IndexVBO* index = new IndexVBO();
-    //    index->loadData(indices, size);
         mIVBO.loadData(indices, size, 3);
-        //mClusterVBO.mount(mIVBO);
 
         c3mClose(c3m);
     }
