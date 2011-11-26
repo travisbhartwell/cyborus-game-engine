@@ -29,7 +29,7 @@ namespace CGE
         }
     }
 
-    void LuaReference::get()
+    void LuaReference::get() const
     {
         if (isSet()) lua_rawgeti(mState, LUA_REGISTRYINDEX, mReference);
     }
