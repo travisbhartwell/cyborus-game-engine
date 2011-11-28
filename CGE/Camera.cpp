@@ -3,7 +3,8 @@
 
 namespace CGE
 {
-    Camera::Camera() : mDistance(0.0f), mRotation(0.0f), mAngle(0.0f)
+    Camera::Camera() : mDistance(0.0f), mRotation(0.0f), mAngle(0.0f),
+        mFollow(NULL)
     {
     }
 
@@ -19,7 +20,20 @@ namespace CGE
         mAngleMatrix.rotateZ(mRotation);
 
         mTranslateMatrix.loadIdentity();
-        mTranslateMatrix.translate(-mPosition[0], -mPosition[1], -mPosition[2]);
+
+        if (mFollow)
+        {
+            const vec3d& position = mFollow->getPosition();
+
+            mTranslateMatrix.translate(-position[0], -position[1],
+                -position[2]);
+        }
+        else
+        {
+            mTranslateMatrix.translate(-mPosition[0], -mPosition[1],
+                -mPosition[2]);
+        }
+
     }
 
     void Camera::setDistance(float inDistance)
@@ -78,13 +92,33 @@ namespace CGE
     void Camera::smartPan(float inX, float inY)
     {
          float theta = TO_RADIANS(mRotation);
-         float dxp = cos(theta) * inX;
-         float dyp = -sin(theta) * inX;
-         dxp += sin(theta) * inY;
-         dyp += cos(theta) * inY;
+         float c = cos(theta);
+         float s = sin(theta);
+
+         float dxp = c * inX;
+         float dyp = -s * inX;
+         dxp += s * inY;
+         dyp += c * inY;
 
          mPosition[0] += dxp;
          mPosition[1] += dyp;
     }
 
+    void Camera::unfollow(bool inCopyEntityPosition)
+    {
+        if (mFollow && inCopyEntityPosition)
+        {
+            const vec3d& position = mFollow->getPosition();
+            mPosition[0] = float(position[0]);
+            mPosition[1] = float(position[1]);
+            mPosition[2] = float(position[2]);
+        }
+
+        mFollow = NULL;
+    }
+
+    void Camera::unfollow(Entity* inEntity, bool inCopyEntityPosition)
+    {
+        if (mFollow == inEntity) unfollow(inEntity, inCopyEntityPosition);
+    }
 }

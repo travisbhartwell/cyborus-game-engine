@@ -112,6 +112,8 @@
 		<Unit filename="../CGE/Platforms.h" />
 		<Unit filename="../CGE/PropertyList.cpp" />
 		<Unit filename="../CGE/PropertyList.h" />
+		<Unit filename="../CGE/PublicMatrixNode.cpp" />
+		<Unit filename="../CGE/PublicMatrixNode.h" />
 		<Unit filename="../CGE/Reference.h" />
 		<Unit filename="../CGE/RenderBin.cpp" />
 		<Unit filename="../CGE/RenderBin.h" />
