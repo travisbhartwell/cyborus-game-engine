@@ -56,7 +56,8 @@ namespace CGE
 
             inline void resetActorMatrix(int inActor)
             {
-                mActors[inActor]->matrix().loadIdentity();
+                //mActors[inActor]->matrix().loadIdentity();
+                mActors[inActor]->resetMatrix();
                 //std::cerr << "actor: " << inActor << std::endl;
             }
 

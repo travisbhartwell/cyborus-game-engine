@@ -108,9 +108,12 @@ namespace CGE
         Actor* a = getActor(inIndex);
         if (a)
         {
-            a->matrix().rotateX(inXRotation);
-            a->matrix().rotateY(inYRotation);
-            a->matrix().rotateZ(inZRotation);
+            //a->matrix().rotateX(inXRotation);
+            //a->matrix().rotateY(inYRotation);
+            //a->matrix().rotateZ(inZRotation);
+            a->rotateX(inXRotation);
+            a->rotateY(inYRotation);
+            a->rotateZ(inZRotation);
         }
     }
 }
