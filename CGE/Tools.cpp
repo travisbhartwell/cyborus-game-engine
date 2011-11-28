@@ -8,28 +8,23 @@ namespace CGE
 {
     bool caseInsensitiveEquals(const char* inA, const char* inB)
     {
-        if (!inA || !inB) return false;
-
         while (true)
         {
-            char a = tolower(*inA);
-            char b = tolower(*inB);
+            char a = tolower(*inA++);
+            char b = tolower(*inB++);
 
             if (a != b)
                 return false;
             else if (!a)
                 return true;
-
-            ++inA;
-            ++inB;
         }
     }
 
     char* fileToBuffer(const char* inFile)
     {
-        FILE *f;
+        FILE* f = fopen(inFile, "r");
 
-        if (!(f = fopen(inFile, "r"))) return NULL;
+        if (!f) return NULL;
 
         fseek(f, 0, SEEK_END);
         size_t length = ftell(f);
