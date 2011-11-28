@@ -4,6 +4,8 @@
 #define TO_RADIANS(n)((n) * PI / 180.0)
 namespace CGE
 {
+    bool caseInsensitiveEquals(const char* inA, const char* inB);
+
     char* fileToBuffer(const char* inFile);
 
     template<class T>
@@ -12,6 +14,11 @@ namespace CGE
         return (inMin * (1.0 - inT)) + (inMax * inT);
     }
 
+    template<typename T>
+    inline void readBytes(void* inData, T& outResult)
+    {
+        outResult = *reinterpret_cast<T*>(inData);
+    }
 }
 
 #endif

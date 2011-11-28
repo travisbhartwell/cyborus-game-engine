@@ -9,4 +9,21 @@
 #   include <AL/alc.h>
 #endif
 
+#include <cstdlib>
+
+namespace CGE
+{
+    struct SourceBinding
+    {
+        ALuint source;
+        ALuint buffer;
+        bool canBeInterrupted;
+    };
+
+    void setupAudio(size_t inNumSources);
+    void cleanupAudio();
+    bool isAudioActive();
+    SourceBinding* requestAudioSource();
+}
+
 #endif

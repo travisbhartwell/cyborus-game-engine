@@ -9,13 +9,21 @@ namespace CGE
     class SoundBuffer
     {
         public:
+            friend class SoundSource;
+
             SoundBuffer(const char* inFile = NULL);
             ~SoundBuffer();
 
             void loadFile(const char* inFile);
+            void bindToSource(ALuint inSource) const;
 
         protected:
         private:
+            void loadOgg(const char* inFile);
+            void loadWav(const char* inFile);
+
+            ALuint mHandle;
+
             SoundBuffer(const SoundBuffer& inSoundBuffer)
             {
                 // no copying
@@ -26,8 +34,6 @@ namespace CGE
                 // no copying
                 return *this;
             }
-
-            ALuint mHandle;
     };
 }
 

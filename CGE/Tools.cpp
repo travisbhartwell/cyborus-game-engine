@@ -2,9 +2,29 @@
 
 #include <cstdlib>
 #include <cstdio>
+#include <cctype>
 
 namespace CGE
 {
+    bool caseInsensitiveEquals(const char* inA, const char* inB)
+    {
+        if (!inA || !inB) return false;
+
+        while (true)
+        {
+            char a = tolower(*inA);
+            char b = tolower(*inB);
+
+            if (a != b)
+                return false;
+            else if (!a)
+                return true;
+
+            ++inA;
+            ++inB;
+        }
+    }
+
     char* fileToBuffer(const char* inFile)
     {
         FILE *f;

@@ -11,11 +11,11 @@ namespace CGE
             LuaReference(lua_State* inState = NULL);
             ~LuaReference();
 
-            inline bool isSet() { return mReference != LUA_NOREF; }
+            inline bool isSet() const { return mReference != LUA_NOREF; }
 
             void unset();
             void set(lua_State* inState);
-            void get();
+            void get() const;
 
         protected:
         private:

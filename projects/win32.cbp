@@ -34,6 +34,7 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-DCURL_STATICLIB" />
 		</Compiler>
 		<Unit filename="..\CGE\Actor.cpp" />
 		<Unit filename="..\CGE\Actor.h" />
@@ -75,11 +76,12 @@
 		<Unit filename="..\CGE\Mutex.h" />
 		<Unit filename="..\CGE\NetworkStream.cpp" />
 		<Unit filename="..\CGE\NetworkStream.h" />
+		<Unit filename="..\CGE\OpenAL\Audio.cpp" />
 		<Unit filename="..\CGE\OpenAL\Audio.h" />
 		<Unit filename="..\CGE\OpenAL\SoundBuffer.cpp" />
 		<Unit filename="..\CGE\OpenAL\SoundBuffer.h" />
-		<Unit filename="..\CGE\OpenAL\SourcePool.cpp" />
-		<Unit filename="..\CGE\OpenAL\SourcePool.h" />
+		<Unit filename="..\CGE\OpenAL\SoundSource.cpp" />
+		<Unit filename="..\CGE\OpenAL\SoundSource.h" />
 		<Unit filename="..\CGE\OpenGL\ClusterVBO.cpp" />
 		<Unit filename="..\CGE\OpenGL\ClusterVBO.h" />
 		<Unit filename="..\CGE\OpenGL\CubeMap.cpp" />
