@@ -12,7 +12,16 @@ namespace CGE
             Camera();
             ~Camera();
 
-            inline const mat4f& matrix() { return mMatrix; }
+            inline const mat4f& getTranslateMatrix() const
+            {
+                return mTranslateMatrix;
+            }
+
+            inline const mat4f& getAngleMatrix() const
+            {
+                return mAngleMatrix;
+            }
+
             void update();
             void setDistance(float inDistance);
             void changeDistance(float inOffset);
@@ -25,7 +34,8 @@ namespace CGE
             void smartPan(float inX, float inY);
 
         private:
-            mat4f mMatrix;
+            mat4f mTranslateMatrix;
+            mat4f mAngleMatrix;
             vec3f mPosition;
             float mDistance;
             float mRotation;

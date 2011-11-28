@@ -13,11 +13,13 @@ namespace CGE
 
     void Camera::update()
     {
-        mMatrix.loadIdentity();
-        if (mDistance > 0.0f) mMatrix.translate(0.0f, 0.0f, -mDistance);
-        mMatrix.rotateX(mAngle);
-        mMatrix.rotateZ(mRotation);
-        mMatrix.translate(-mPosition[0], -mPosition[1], -mPosition[2]);
+        mAngleMatrix.loadIdentity();
+        if (mDistance > 0.0f) mAngleMatrix.translate(0.0f, 0.0f, -mDistance);
+        mAngleMatrix.rotateX(mAngle);
+        mAngleMatrix.rotateZ(mRotation);
+
+        mTranslateMatrix.loadIdentity();
+        mTranslateMatrix.translate(-mPosition[0], -mPosition[1], -mPosition[2]);
     }
 
     void Camera::setDistance(float inDistance)
