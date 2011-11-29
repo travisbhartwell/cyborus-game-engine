@@ -43,6 +43,8 @@ namespace CGE
         mPosition[1] += mVelocity[1];
         mPosition[2] += mVelocity[2];
 
+        mActors[2]->translate(mForwardDirection[0], mForwardDirection[1], mForwardDirection[2]);
+
 
         mTransform.loadIdentity();
 

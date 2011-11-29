@@ -30,6 +30,21 @@ namespace CGE
             inline void setRadius(double inRadius)  { mRadius = inRadius;   }
             inline void setMass(double inMass)      { mMass = inMass;       }
 
+            inline void calculateForwardDirection()
+            {
+                //for now, the first actor added is assumed to be the base direction actor
+                vec3d rotation = mActors[0]->getRotation();
+
+                Matrix4x4<double> transformation;
+                transformation.rotateY(rotation[1]);
+                transformation.rotateX(rotation[0]);
+                transformation.rotateZ(rotation[2]);
+
+                vec3d initial;
+                initial[1] = 1.0d;
+                transformation.transform(initial, mForwardDirection);
+            }
+
             inline Actor* getActor(size_t inIndex)
             {
                 return inIndex < mActors.size() ? mActors[inIndex] : NULL;
@@ -139,6 +154,9 @@ namespace CGE
             vec3d mTurn;
 
             std::vector<Actor*> mActors;
+
+            vec3d mForwardDirection;
+
     };
 }
 #endif
