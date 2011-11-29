@@ -19,6 +19,15 @@ namespace CGE
             inline void display() { mModel->display(); }
             //inline CGE::Matrix4x4<float>& matrix() { return mTransform; }
 
+            inline void calculateDirection()
+            {
+                Matrix4x4 transformation;
+                transformation.rotateY(mRotation[1]);
+                transformation.rotateX(mRotation[0]);
+                transformation.rotateZ(mRotation[2]);
+
+            }
+
             inline void resetMatrix()
             {
                 mTransform.loadIdentity();
@@ -102,6 +111,8 @@ namespace CGE
             vec3d mRotation;
             vec3d mTranslation;
             vec3d mScale;
+
+            vec3d mForwardDirection;
 
             Actor** mHead;
             Actor* mNextActor;
