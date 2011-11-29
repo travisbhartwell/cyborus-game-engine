@@ -19,6 +19,7 @@ namespace CGE
         if (mHead)
         {
             mHead->mHead = NULL;
+            mHead->mPreviousActor = inActor;
             inActor->mNextActor = mHead;
         }
 
