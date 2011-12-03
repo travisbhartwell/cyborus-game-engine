@@ -20,6 +20,7 @@ namespace CGE
     void SceneGraphNode::addChildNode(SceneGraphNode* inNode)
     {
         assert(inNode != NULL);
+        inNode->removeFromParentNode();
         inNode->mParent = this;
         mNodes.push_back(inNode);
     }

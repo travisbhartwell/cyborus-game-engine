@@ -15,8 +15,8 @@ namespace CGE
     {
         for (size_t i = 0; i < mActors.size(); ++i)
         {
-            mActors[i]->removeFromBin();
-            delete mActors[i];
+            Actor* a = mActors[i];
+            delete a;
         }
     }
 

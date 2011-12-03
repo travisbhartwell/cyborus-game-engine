@@ -9,6 +9,7 @@ namespace CGE
 
     Actor::~Actor()
     {
+        removeFromBin();
     }
 
     void Actor::removeFromBin()
