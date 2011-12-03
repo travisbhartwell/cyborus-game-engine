@@ -35,18 +35,13 @@ namespace CGE
                 //for now, the first actor added is assumed to be the base direction actor
                 vec3d rotation = mActors[0]->getRotation();
 
-                if (rotation[0] > 0.0 || rotation[1] > 0.0 || rotation[1] > 0.0)
-                {
-                    int l = 0;
-                }
-
                 Matrix4x4<double> transformation;
                 transformation.rotateY(rotation[1]);
                 transformation.rotateX(rotation[0]);
                 transformation.rotateZ(rotation[2]);
 
                 vec3d initial;
-                initial[1] = 1.0d;
+                initial[2] = 1.0d;
                 transformation.transform(initial, mForwardDirection);
             }
 
