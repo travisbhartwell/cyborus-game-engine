@@ -30,10 +30,15 @@ namespace CGE
             inline void setRadius(double inRadius)  { mRadius = inRadius;   }
             inline void setMass(double inMass)      { mMass = inMass;       }
 
-            inline void calculateForwardDirection()
+            void calculateForwardDirection()
             {
                 //for now, the first actor added is assumed to be the base direction actor
                 vec3d rotation = mActors[0]->getRotation();
+
+                if (rotation[0] > 0.0 || rotation[1] > 0.0 || rotation[1] > 0.0)
+                {
+                    int l = 0;
+                }
 
                 Matrix4x4<double> transformation;
                 transformation.rotateY(rotation[1]);

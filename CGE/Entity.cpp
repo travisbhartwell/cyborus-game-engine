@@ -43,7 +43,9 @@ namespace CGE
         mPosition[1] += mVelocity[1];
         mPosition[2] += mVelocity[2];
 
-        mActors[2]->translate(mForwardDirection[0], mForwardDirection[1], mForwardDirection[2]);
+        calculateForwardDirection();
+        mActors[1]->resetMatrix();
+        mActors[1]->translate(mForwardDirection[0], mForwardDirection[1], mForwardDirection[2]);
 
 
         mTransform.loadIdentity();
@@ -113,8 +115,8 @@ namespace CGE
             //a->matrix().rotateX(inXRotation);
             //a->matrix().rotateY(inYRotation);
             //a->matrix().rotateZ(inZRotation);
-            a->rotateX(inXRotation);
             a->rotateY(inYRotation);
+            a->rotateX(inXRotation);
             a->rotateZ(inZRotation);
         }
     }
