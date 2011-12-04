@@ -25,10 +25,12 @@ namespace CGE
             inline const vec3d& getVelocity() const { return mVelocity;     }
             inline double getMaxSpeed() const       { return mMaxSpeed;     }
             inline double getCurrentSpeed() const   { return mCurrentSpeed; }
+            inline bool getIsBeingDeleted() const   { return mIsBeingDeleted; }
 
             inline void setMaxSpeed(double inSpeed) { mMaxSpeed = inSpeed;  }
             inline void setRadius(double inRadius)  { mRadius = inRadius;   }
             inline void setMass(double inMass)      { mMass = inMass;       }
+            inline void setIsBeingDeleted()         { mIsBeingDeleted = true; }
 
             void calculateForwardDirection()
             {
@@ -156,6 +158,8 @@ namespace CGE
             std::vector<Actor*> mActors;
 
             vec3d mForwardDirection;
+
+            bool mIsBeingDeleted;
 
     };
 }

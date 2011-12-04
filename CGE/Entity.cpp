@@ -9,6 +9,7 @@ namespace CGE
     {
         assert(inState != NULL);
         mLuaTable.set(inState);
+        mIsBeingDeleted = false;
     }
 
     Entity::~Entity()
