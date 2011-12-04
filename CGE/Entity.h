@@ -41,7 +41,7 @@ namespace CGE
                 transformation.rotateZ(rotation[2]);
 
                 vec3d initial;
-                initial[2] = 1.0d;
+                initial[2] = 1.0;
                 transformation.transform(initial, mForwardDirection);
             }
 
