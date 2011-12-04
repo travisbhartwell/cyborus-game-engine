@@ -4,12 +4,11 @@
 
 namespace CGE
 {
-    Entity::Entity(lua_State* inState) : mMass(1.0), mRadius(1.0), mMaxSpeed(0.0),
-        mCurrentSpeed(0.0)
+    Entity::Entity(lua_State* inState) : mMass(1.0), mRadius(1.0),
+        mMaxSpeed(0.0), mCurrentSpeed(0.0), mIsBeingDeleted(false)
     {
         assert(inState != NULL);
         mLuaTable.set(inState);
-        mIsBeingDeleted = false;
     }
 
     Entity::~Entity()

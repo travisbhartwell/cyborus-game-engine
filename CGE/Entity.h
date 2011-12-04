@@ -7,6 +7,8 @@
 #include <lua.hpp>
 #include <vector>
 
+#include <iostream>
+
 namespace CGE
 {
     class Entity : public SceneGraphNode
@@ -30,7 +32,11 @@ namespace CGE
             inline void setMaxSpeed(double inSpeed) { mMaxSpeed = inSpeed;  }
             inline void setRadius(double inRadius)  { mRadius = inRadius;   }
             inline void setMass(double inMass)      { mMass = inMass;       }
-            inline void setIsBeingDeleted()         { mIsBeingDeleted = true; }
+            inline void setIsBeingDeleted()
+            {
+                mIsBeingDeleted = true;
+                std::cerr << "setIsBeingDeleted() " << mIsBeingDeleted << "\n";
+            }
 
             void calculateForwardDirection()
             {
@@ -44,7 +50,10 @@ namespace CGE
 
                 vec3d initial;
                 initial[2] = 1.0;
-                transformation.transform(initial, mForwardDirection);
+
+                vec4d result;
+                transformation.transform(initial, result);
+                mForwardDirection = result;
             }
 
             inline Actor* getActor(size_t inIndex)
@@ -158,9 +167,7 @@ namespace CGE
             std::vector<Actor*> mActors;
 
             vec3d mForwardDirection;
-
             bool mIsBeingDeleted;
-
     };
 }
 #endif
