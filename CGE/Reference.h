@@ -47,8 +47,25 @@ namespace CGE
 
             inline bool isNull() { return !mContainer; }
 
-            inline T* operator->() { return mContainer->pointer(); }
-            inline const T* operator->() const { return mContainer->pointer(); }
+            inline operator T*()
+            {
+                return mContainer ? mContainer->pointer() : NULL;
+            }
+
+            inline operator const T*() const
+            {
+                return mContainer ? mContainer->pointer() : NULL;
+            }
+
+            inline T* operator->()
+            {
+                return mContainer ? mContainer->pointer() : NULL;
+            }
+
+            inline const T* operator->() const
+            {
+                return mContainer ? mContainer->pointer() : NULL;
+            }
 
             inline T& operator*() { return *mContainer->pointer(); }
             inline const T& operator*() const { return *mContainer->pointer(); }
@@ -82,12 +99,13 @@ namespace CGE
 
             inline bool operator==(const T* inPointer) const
             {
-                return mContainer && mContainer->pointer() == inPointer;
+                return (!mContainer && !inPointer)
+                    || (mContainer && mContainer->pointer() == inPointer);
             }
 
             inline bool operator!=(const T* inPointer) const
             {
-                return !mContainer || mContainer->pointer() != inPointer;
+                return !operator==(inPointer);
             }
 
         private:
