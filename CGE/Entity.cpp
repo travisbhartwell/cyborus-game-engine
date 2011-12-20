@@ -66,7 +66,7 @@ namespace CGE
         mVelocity[2] = (vec[2] + inMomentum[2]) / getMass();
     }
 
-    void Entity::setCollisionCB(lua_State* inState)
+    void Entity::setCollisionCallback(lua_State* inState)
     {
         assert(inState != NULL);
         mLuaCallback.set(inState);

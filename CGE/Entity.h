@@ -32,15 +32,13 @@ namespace CGE
             inline void setMaxSpeed(double inSpeed) { mMaxSpeed = inSpeed;  }
             inline void setRadius(double inRadius)  { mRadius = inRadius;   }
             inline void setMass(double inMass)      { mMass = inMass;       }
-            inline void setIsBeingDeleted()
-            {
-                mIsBeingDeleted = true;
-                std::cerr << "setIsBeingDeleted() " << mIsBeingDeleted << "\n";
-            }
+            inline void setIsBeingDeleted()         { mIsBeingDeleted = true; }
 
             void calculateForwardDirection()
             {
-                //for now, the first actor added is assumed to be the base direction actor
+                // For now, the first actor added is assumed to be the
+                // base direction actor.
+
                 vec3d rotation = mActors[0]->getRotation();
 
                 Matrix4x4<double> transformation;
@@ -48,8 +46,9 @@ namespace CGE
                 transformation.rotateX(rotation[0]);
                 transformation.rotateZ(rotation[2]);
 
-                vec3d initial;
-                initial[2] = 1.0;
+                vec4d initial;
+                initial[2] = -1.0;
+                initial[3] = 1.0;
 
                 vec4d result;
                 transformation.transform(initial, result);
@@ -61,7 +60,7 @@ namespace CGE
                 return inIndex < mActors.size() ? mActors[inIndex] : NULL;
             }
 
-            void setCollisionCB(lua_State* inState);
+            void setCollisionCallback(lua_State* inState);
 
             void onCollision(lua_State* inState, Entity* inEntity);
 
