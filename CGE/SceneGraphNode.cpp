@@ -49,7 +49,7 @@ namespace CGE
         if (mParent) mParent->removeChildNode(this);
     }
 
-    void SceneGraphNode::updateMatrices(const CGE::Matrix4x4<float>& inMatrix)
+    void SceneGraphNode::updateMatrices(const Matrix4x4<float>& inMatrix)
     {
         mCompositeTransform.multiply(inMatrix, mTransform);
         for (std::list<SceneGraphNode*>::iterator i = mNodes.begin();

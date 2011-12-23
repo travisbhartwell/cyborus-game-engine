@@ -17,9 +17,6 @@ namespace CGE
             virtual ~Actor();
 
             inline void display() { mModel->display(); }
-            //inline CGE::Matrix4x4<float>& matrix() { return mTransform; }
-
-
 
             inline void resetMatrix()
             {

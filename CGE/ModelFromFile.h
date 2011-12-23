@@ -35,9 +35,9 @@ namespace CGE
             }
             void loadC3M(const char* inFile);
 
-            CGE::Texture2D mTexture;
-            CGE::InterleavedVBO mVBO;
-            CGE::IndexVBO mIVBO;
+            Texture2D mTexture;
+            InterleavedVBO mVBO;
+            IndexVBO mIVBO;
     };
 }
 
