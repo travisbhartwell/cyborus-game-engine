@@ -14,6 +14,11 @@ namespace CGE
 {
     SoundBuffer::SoundBuffer(const char* inFile) : mHandle(0)
     {
+        (void)OV_CALLBACKS_DEFAULT;
+        (void)OV_CALLBACKS_NOCLOSE;
+        (void)OV_CALLBACKS_STREAMONLY;
+        (void)OV_CALLBACKS_STREAMONLY_NOCLOSE;
+
         if (isAudioActive())
         {
             alGenBuffers(1, &mHandle);
