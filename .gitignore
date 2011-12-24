@@ -15,3 +15,6 @@ bin/
 # SDL nonsense
 stdout.txt
 stderr.txt
+
+# SCons nonsense
+.sconsign.dblite
