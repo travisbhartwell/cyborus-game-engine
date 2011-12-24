@@ -1,0 +1,20 @@
+import os
+
+env = Environment(CPPPATH = ["/usr/include/SDL", "/usr/include/lua5.1"],
+                  CCFLAGS = ["-Wall", "-Wextra"])
+
+CGEDir = "../CGE"
+CGEFiles = env.Glob(CGEDir + "/*.cpp") + env.Glob(CGEDir + "/*.c")
+
+OpenALDir = os.path.join(CGEDir, "OpenAL")
+OpenALFiles = env.Glob(OpenALDir + "/*.cpp")
+
+OpenGLDir = os.path.join(CGEDir, "OpenGL")
+OpenGLFiles = env.Glob(OpenGLDir + "/*.cpp")
+
+UIDir = os.path.join(CGEDir, "UI")
+UIFiles = env.Glob(UIDir + "/*.cpp")
+
+LibraryFiles = CGEFiles + OpenALFiles + OpenGLFiles + UIFiles
+env.StaticLibrary('libcge-ubu64', LibraryFiles)
+
