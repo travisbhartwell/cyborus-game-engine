@@ -17,7 +17,7 @@ debug_env.Replace(CCFLAGS=CCFLAGS + ["-g"])
 for build in ['release', 'debug']:
     env = globals()[build + "_env"]
     build_dir = os.path.join("build", build)
-    library = os.path.join(build_dir, 'libcge-ubu64-' + build)
+    library = 'libcge-ubu64-' + build
     
     VariantDir(build_dir, SOURCE_DIR, duplicate=0)
 
@@ -29,7 +29,9 @@ for build in ['release', 'debug']:
     OpenALFiles = Glob(OpenALDir + "/*.cpp")
 
     OpenGLDir = os.path.join(build_dir, "OpenGL")
-    OpenGLFiles = Glob(OpenGLDir + "/*.cpp")
+    OpenGLFiles = \
+        Glob(OpenGLDir + "/*.cpp") + \
+        Glob(OpenGLDir + "/*.c")
 
     UIDir = os.path.join(build_dir, "UI")
     UIFiles = Glob(UIDir + "/*.cpp")
